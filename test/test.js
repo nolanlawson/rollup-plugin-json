@@ -440,4 +440,19 @@ describe( 'rollup-plugin-json', function () {
 			fn( assert );
 		});
 	});
+
+  it( 'handles JSON objects with escaped characters', function () {
+  	debugger;
+    return rollup.rollup({
+      entry: 'samples/escapes/main.js',
+      plugins: [ json() ]
+    }).then( function ( bundle ) {
+      var generated = bundle.generate();
+      var code = generated.code;
+
+      var fn = new Function( 'assert', code );
+      fn( assert );
+    });
+  });
+
 });
